@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import {
   Container,
   Typography,
@@ -14,7 +14,6 @@ import {
   TableCell,
   TableBody,
   Paper,
-  Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PROVIDERS_QUERY } from "../Queries/providersQuery";
@@ -43,11 +42,10 @@ function Page() {
   const providers = useQuery(PROVIDERS_QUERY, {
     variables: {
       filter: `region.url=${REGION_URL}`,
-      limit: 50,
+      limit: 200,
       offset: 0,
       sort: "name",
     },
-    notifyOnNetworkStatusChange: true,
   });
   const providersData = providers?.data?.providers?.data || [];
 
@@ -59,7 +57,6 @@ function Page() {
       offset: 0,
       sort: "name",
     },
-    notifyOnNetworkStatusChange: true,
   });
   const tariffsData = tariffs?.data?.tariffs?.data || [];
 
